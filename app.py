@@ -3,7 +3,7 @@ import logging
 import validators
 from dotenv import load_dotenv
 from discord import Intents, Client, Message
-from responses import get_response, validate_twitter_url, validate_vxtwitter_url
+import responses
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -23,12 +23,12 @@ async def send_message(message: Message, user_message: str) -> None:
     """Sends a message if the user message is a valid Twitter URL and not a vxTwitter URL."""
     if not validators.url(user_message):
         return
-    if not validate_twitter_url(user_message):
+    if not responses.validate_twitter_url(user_message):
         return
-    if validate_vxtwitter_url(user_message):
+    if responses.validate_vxtwitter_url(user_message):
         return
     try:
-        response: str = get_response(user_message)
+        response: str = responses.get_response(user_message)
         await message.channel.send(response)
     except Exception as e:
         logging.error(e)

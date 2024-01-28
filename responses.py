@@ -1,5 +1,6 @@
 import re
 
+# Constants
 TWITTER_URLS = ["twitter.com", "t.co", "x.com"]
 VXTWITTER_URL = "vxtwitter.com"
 
@@ -10,13 +11,12 @@ def get_response(user_input: str) -> str:
         lowered = lowered.replace(url, VXTWITTER_URL)
     return lowered
 
-# 
 def validate_twitter_url(url: str) -> bool:
     """
     Check if the url is a "valid" twitter url.
     A valid twitter url in this context contains "twitter.com", "t.co", or "x.com" followed by "/${username}/status/${tweet_number}/*".
     """
-    pattern = r'(' + '|'.join(TWITTER_URLS) + r')\/[^\/]+\/status\/\d+\/?.*'
+    pattern = r'(' + '|'.join(['//' + url for url in TWITTER_URLS]) + r')\/[^\/]+\/status\/\d+\/?.*'
     return bool(re.search(pattern, url))
 
 def validate_vxtwitter_url(url: str) -> bool:
