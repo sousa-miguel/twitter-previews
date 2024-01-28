@@ -1,4 +1,5 @@
 import os
+import argparse
 import logging
 import validators
 from dotenv import load_dotenv
@@ -8,10 +9,19 @@ import responses
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 
+# Set up command-line arguments
+parser = argparse.ArgumentParser(description='Get Discord token.')
+parser.add_argument('--token', type=str, help='Discord token')
+
+# Parse command-line arguments
+args = parser.parse_args()
+
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = "DISCORD_TOKEN"
-TOKEN = os.getenv(DISCORD_TOKEN)
+
+# If token is provided as an argument, use it. Otherwise, get it from .env file
+TOKEN = args.token if args.token else os.getenv("DISCORD_TOKEN")
 
 # Setup BOT
 intents = Intents.default()
