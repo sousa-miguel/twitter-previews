@@ -10,8 +10,8 @@ import responses
 logging.basicConfig(level=logging.INFO)
 
 # Set up command-line arguments
-parser = argparse.ArgumentParser(description='Get Discord token.')
-parser.add_argument('--token', type=str, help='Discord token')
+parser = argparse.ArgumentParser(description="Get Discord token.")
+parser.add_argument("--token", type=str, help="Discord token")
 
 # Parse command-line arguments
 args = parser.parse_args()
