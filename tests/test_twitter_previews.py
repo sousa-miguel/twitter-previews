@@ -1,25 +1,35 @@
 import unittest
 from responses import validate_twitter_url, get_response, validate_vxtwitter_url
 
+
 class TestTwitterPreviews(unittest.TestCase):
     def setUp(self):
         self.valid_twitter_urls = [
             "https://twitter.com/username/status/1234567890",
             "https://t.co/username/status/1234567890",
-            "https://x.com/username/status/1234567890"
+            "https://x.com/username/status/1234567890",
         ]
 
         self.invalid_twitter_urls = [
             "https://not_twitter.com/username/status/1234567890",
             "https://twitter.com/username/status/not_a_number",
             "https://twitter.com/username/no_status/1234567890",
-            "https://twitter.com/username/status/"
+            "https://twitter.com/username/status/",
         ]
 
         self.get_response_test_cases = [
-            ("https://twitter.com/username/status/1234567890", "https://vxtwitter.com/username/status/1234567890"),
-            ("https://t.co/username/status/1234567890", "https://vxtwitter.com/username/status/1234567890"),
-            ("https://x.com/username/status/1234567890", "https://vxtwitter.com/username/status/1234567890"),
+            (
+                "https://twitter.com/username/status/1234567890",
+                "https://vxtwitter.com/username/status/1234567890",
+            ),
+            (
+                "https://t.co/username/status/1234567890",
+                "https://vxtwitter.com/username/status/1234567890",
+            ),
+            (
+                "https://x.com/username/status/1234567890",
+                "https://vxtwitter.com/username/status/1234567890",
+            ),
         ]
 
         self.valid_vxtwitter_urls = [
@@ -48,6 +58,7 @@ class TestTwitterPreviews(unittest.TestCase):
     def test_validate_vxtwitter_url_with_invalid_urls(self):
         for url in self.invalid_vxtwitter_urls:
             self.assertFalse(validate_vxtwitter_url(url))
+
 
 if __name__ == "__main__":
     unittest.main()
