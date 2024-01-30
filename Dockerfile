@@ -4,7 +4,7 @@ ARG DISCORD_TOKEN
 ENV DISCORD_TOKEN=$DISCORD_TOKEN
 
 LABEL   org.opencontainers.image.authors="Miguel Sousa" \
-        org.opencontainers.image.title="Twitter_Preview_Discord_Bot" \
+        org.opencontainers.image.title="twitter-previews" \
         org.opencontainers.image.version="1.0.0"
 
 WORKDIR /app
