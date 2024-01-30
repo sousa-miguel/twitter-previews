@@ -11,7 +11,8 @@ logging.basicConfig(level=logging.INFO)
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = "DISCORD_TOKEN"
-TOKEN = os.getenv(DISCORD_TOKEN)
+
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 # Setup BOT
 intents = Intents.default()
