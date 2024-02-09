@@ -1,5 +1,5 @@
 import unittest
-from responses import validate_twitter_url, get_response, validate_vxtwitter_url
+from src.responses import validate_twitter_url, get_response, validate_vxtwitter_url
 
 
 class TestTwitterPreviews(unittest.TestCase):
