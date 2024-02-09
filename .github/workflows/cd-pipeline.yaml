@@ -12,23 +12,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Docker meta
-      #   id: meta
-      #   uses: docker/metadata-action@v5
-      #   with:
-      #       # list of Docker images to use as base name for tags
-      #       images: |
-      #           name/app
-      #           ghcr.io/username/app            
-      #           # generate Docker tags based on the following events/attributes
-      #           tags: |
-      #           type=schedule
-      #           type=ref,event=branch
-      #           type=ref,event=pr
-      #           type=semver,pattern={{version}}
-      #           type=semver,pattern={{major}}.{{minor}}
-      #           type=semver,pattern={{major}}
-      #           type=sha            
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+            images: ${{ github.repository }}
+            flavor: |
+              latest=${{ github.ref == 'refs/heads/main' }}
+              sha  
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -42,6 +33,6 @@ jobs:
         with:
             context: .
             push: true
-            tags: ${{ github.repository }}:latest, ${{ github.repository }}:1.0.0 # Get tags from Dockerfile ?
-            labels: # Get labels from Dockerfile ?
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
             build-args: DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}
