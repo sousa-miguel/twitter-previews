@@ -7,13 +7,14 @@ on:
     tags:
       - 'v*'
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
-  publish-docker-file:
+  build-and-push:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,3 +41,4 @@ jobs:
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
             build-args: DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
